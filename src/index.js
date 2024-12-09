@@ -7,17 +7,23 @@ const controls = document.getElementById("controls");
 const play = document.getElementById("start")
 game.update();
 modos.addEventListener("change", () =>{
+    game.gameRunning = false;
     if (modos.value === "manual"){
         console.log("manual")
         controls.classList.add("hidden");
+        play.classList.remove("hidden");
     }
     else{
         controls.classList.remove("hidden");
+        play.classList.add("hidden");
+        document.getElementById("game-over").classList.add("hidden");
     }
     game.mode = modos.value;
+    game.resetGame();
 });
 play.addEventListener("click", () =>{
-    game.resetGameState();
+    game.gameRunning = true;
+    game.update();
 });
 
 

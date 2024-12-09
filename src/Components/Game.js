@@ -26,7 +26,6 @@ export class Game {
         this.maxSteps = 1000;
         this.readInputs();
         this.addEventListeners();
-        this.endGame();
     }
 
 
@@ -62,6 +61,7 @@ export class Game {
     trainAgent() {
         console.log("Iniciando entrenamiento del agente...");
         this.gameRunning = false;
+        this.agent.qTable = {};
         for (let episode = 0; episode < this.episodes; episode++) {
             let totalReward = 0;
             let steps = 0;

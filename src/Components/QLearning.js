@@ -44,6 +44,6 @@ export class QLearning {
     }
 
     decayExploration() {
-        this.epsilon *= this.epsilonDecay;
-    }
+        this.epsilon = Math.max(0.1, this.epsilon * this.epsilonDecay);
+    }    
 }

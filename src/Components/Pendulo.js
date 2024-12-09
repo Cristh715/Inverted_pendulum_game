@@ -12,7 +12,7 @@ export class Pendulo {
     }
 
     update(torque, windStrength) {
-        this.angularAcceleration = (Pendulo.GRAVITY / this.length) * Math.sin(this.angle) + torque + windStrength;
+        this.angularAcceleration = (Pendulo.GRAVITY / this.length) * Math.sin(this.angle) + torque;
         // console.log(this.angularAcceleration)
         this.angularVelocity += this.angularAcceleration;
         this.angularVelocity *= 0.85;
