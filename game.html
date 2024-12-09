@@ -3,10 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cart Pole Game</title>
+  <title>Pengüin</title>
   <link rel="stylesheet" href="style.css" />
+  <script type="module" src="./src/index.js"></script>
 </head>
 <body>
+  <section class="tools">
+    <div class="change-modo">
+      <label for="modos">Modos de juego:</label>
+      <select name="modos" id="modo-game">
+        <option value="manual">Manual</option>
+        <option value="bot">QLearning</option>
+      </select>
+    </div>
+    <section class="controls hidden" id="controls">
+      <label>
+        Episodios
+        <input id="episodes" type="number" value="100">
+      </label>
+      <label>
+        Pasos
+        <input id="steps" type="number" value="100">
+      </label>
+      <button id="startTrain">Entrenar</button>
+    </section>
+    <button id="start">Iniciar</button>
+  </section>
   <div class="game-container">
     <canvas id="game-canvas"></canvas>
     <div id="game-over" class="hidden">
@@ -15,6 +37,8 @@
       <button id="restart">Intentar de nuevo</button>
     </div>
   </div>
-  <script src="index.js"></script>
+  <section id="grafica">
+
+  </section>
 </body>
 </html>
