@@ -9,7 +9,7 @@ export class QLearning {
     }
 
     getStateKey(carrito, pendulo) {
-        const carritoPos = Math.round(carrito.x / 5) * 5;
+        const carritoPos = Math.round(carrito.x / 10) * 10;
         const penduloAngle = Math.round(pendulo.angle * 10) / 10;
         const penduloVelocity = Math.round(pendulo.angularVelocity * 10) / 10;
         return `${carritoPos}_${penduloAngle}_${penduloVelocity}`;

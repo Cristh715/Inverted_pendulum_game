@@ -1,6 +1,6 @@
 export class Wind {
     constructor() {
-        this.strength = 0.0005;
+        this.strength = 0;
         this.lastActivation = 0;
         this.active = false;
     }
@@ -13,18 +13,18 @@ export class Wind {
         }
         
         if (this.active && now - this.lastActivation > 2000) {
-            this.deactivateWind();
+            this.desactivateWind();
         }
         console.log("wind: ", this.strength)
     }
 
     activateWind() {
-        this.strength = (Math.random() * 2 - 1) * 0.003;
+        this.strength = (Math.random() * 2 - 1) * 0.002;//0.005
         this.lastActivation = Date.now();
         this.active = true;
     }
 
-    deactivateWind() {
+    desactivateWind() {
         this.strength = 0;
         this.active = false;
     }

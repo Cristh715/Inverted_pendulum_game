@@ -28,8 +28,7 @@ modos.addEventListener("keydown", (e) => {
 });
 
 play.addEventListener("click", () => {
-    game.stopAnimation();
-    game.update();
+    game.resetGame();
 });
 
 

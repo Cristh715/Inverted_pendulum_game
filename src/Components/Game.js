@@ -25,6 +25,7 @@ export class Game {
         this.currentEpisode = 0;
         this.maxSteps = 1000;
         this.animationId = null;
+        this.windRunning = false;
 
         this.readInputs();
         this.addEventListeners();
@@ -66,7 +67,6 @@ export class Game {
         for (let episode = 0; episode < this.episodes; episode++) {
             let totalReward = 0;
             let steps = 0;
-
             this.resetGameState();
 
             while (steps < this.maxSteps) {
@@ -148,6 +148,8 @@ export class Game {
         this.sprite.drawCarrito(this.ctx, this.carrito);
         this.pendulo.draw(this.ctx);
         this.drawScore();
+        if(this.windRunning)
+            this.wind.update();
 
         if (Math.abs(this.pendulo.angle) > Pendulo.MAX_ANGLE) {
             if (this.mode === "manual") {
@@ -164,6 +166,7 @@ export class Game {
     }
 
     resetGame() {
+        this.windRunning = document.getElementById("wind").checked;
         this.stopAnimation();
         this.gameRunning = true;
         this.score = 0;

@@ -5,14 +5,14 @@ export class Pendulo {
 
     constructor(carrito) {
         this.carrito = carrito;
-        this.length = 100;
-        this.angle = 0;
+        this.length = 200;
+        this.angle = 0.1;
         this.angularVelocity = 0;
         this.angularAcceleration = 0;
     }
 
     update(torque, windStrength) {
-        this.angularAcceleration = (Pendulo.GRAVITY / this.length) * Math.sin(this.angle) + torque;
+        this.angularAcceleration = (Pendulo.GRAVITY / this.length) * Math.sin(this.angle) + torque + windStrength;
         this.angularVelocity += this.angularAcceleration;
         this.angularVelocity *= 0.85;
         this.angle += this.angularVelocity;
@@ -28,7 +28,7 @@ export class Pendulo {
     }
 
     reset() {
-        this.angle = 0;
+        this.angle = 0.1;
         this.angularVelocity = 0;
         this.angularAcceleration = 0;
     }
