@@ -100,5 +100,13 @@ select {
   border-radius: 5px;
   color: #471e65;
   font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.tools{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
 
