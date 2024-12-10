@@ -5,7 +5,7 @@ export class Pendulo {
 
     constructor(carrito) {
         this.carrito = carrito;
-        this.length = 200;
+        this.length = 100;
         this.angle = 0;
         this.angularVelocity = 0;
         this.angularAcceleration = 0;
@@ -13,7 +13,6 @@ export class Pendulo {
 
     update(torque, windStrength) {
         this.angularAcceleration = (Pendulo.GRAVITY / this.length) * Math.sin(this.angle) + torque;
-        // console.log(this.angularAcceleration)
         this.angularVelocity += this.angularAcceleration;
         this.angularVelocity *= 0.85;
         this.angle += this.angularVelocity;

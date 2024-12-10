@@ -24,10 +24,11 @@ export class Game {
         this.episodes = 3000;
         this.currentEpisode = 0;
         this.maxSteps = 1000;
+        this.animationId = null;
+
         this.readInputs();
         this.addEventListeners();
     }
-
 
     readInputs() {
         const episodesInput = document.getElementById("episodes");
@@ -42,7 +43,6 @@ export class Game {
         document.addEventListener("keyup", (e) => (this.keys[e.key] = false));
         document.getElementById("restart").addEventListener("click", () => this.resetGame());
     }
-    
 
     clearCanvas() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -60,6 +60,7 @@ export class Game {
 
     trainAgent() {
         console.log("Iniciando entrenamiento del agente...");
+        this.stopAnimation();
         this.gameRunning = false;
         this.agent.qTable = {};
         for (let episode = 0; episode < this.episodes; episode++) {
@@ -91,7 +92,14 @@ export class Game {
         console.log("Entrenamiento completado.");
         this.gameRunning = true;
         this.agent.epsilon = 0.01;
-        this.resetGameState();
+        this.resetGame();
+    }
+
+    stopAnimation() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
     }
 
     resetGameState() {
@@ -126,7 +134,7 @@ export class Game {
 
     update() {
         if (!this.gameRunning) return;
-    
+
         if (this.mode === "bot") {
             const state = this.agent.getStateKey(this.carrito, this.pendulo);
             const action = this.agent.chooseAction(state);
@@ -134,38 +142,38 @@ export class Game {
         } else {
             this.manualControl();
         }
-    
+
         this.clearCanvas();
         this.drawBackground();
         this.sprite.drawCarrito(this.ctx, this.carrito);
         this.pendulo.draw(this.ctx);
         this.drawScore();
-        // this.wind.update();
-    
+
         if (Math.abs(this.pendulo.angle) > Pendulo.MAX_ANGLE) {
             if (this.mode === "manual") {
                 this.endGame();
                 return;
             } else {
                 this.resetGameState();
+                this.score = 0;
             }
         }
-    
+
         this.score++;
-        if (this.gameRunning) {
-            requestAnimationFrame(() => this.update());
-        }
+        this.animationId = requestAnimationFrame(() => this.update());
     }
 
     resetGame() {
+        this.stopAnimation();
         this.gameRunning = true;
         this.score = 0;
-        this.update();
         this.resetGameState();
         document.getElementById("game-over").classList.add("hidden");
+        this.update();
     }
-    
+
     endGame() {
+        this.stopAnimation();
         this.gameRunning = false;
         document.getElementById("score").textContent = this.score;
         document.getElementById("game-over").classList.remove("hidden");

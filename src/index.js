@@ -5,15 +5,16 @@ const startTrain = document.getElementById("startTrain");
 const modos = document.getElementById("modo-game");
 const controls = document.getElementById("controls");
 const play = document.getElementById("start")
-game.update();
-modos.addEventListener("change", () =>{
+
+modos.addEventListener("change", () => {
+    game.stopAnimation();
     game.gameRunning = false;
-    if (modos.value === "manual"){
+    if (modos.value === "manual") {
         console.log("manual")
         controls.classList.add("hidden");
         play.classList.remove("hidden");
     }
-    else{
+    else {
         controls.classList.remove("hidden");
         play.classList.add("hidden");
         document.getElementById("game-over").classList.add("hidden");
@@ -21,8 +22,13 @@ modos.addEventListener("change", () =>{
     game.mode = modos.value;
     game.resetGame();
 });
-play.addEventListener("click", () =>{
-    game.gameRunning = true;
+
+modos.addEventListener("keydown", (e) => {
+        e.preventDefault();
+});
+
+play.addEventListener("click", () => {
+    game.stopAnimation();
     game.update();
 });
 
