@@ -4,6 +4,7 @@ const game = new Game("game-canvas");
 const startTrain = document.getElementById("startTrain");
 const modos = document.getElementById("modo-game");
 const controls = document.getElementById("controls");
+const grafica = document.getElementById("grafica-container");
 const play = document.getElementById("start")
 
 modos.addEventListener("change", () => {
@@ -12,11 +13,13 @@ modos.addEventListener("change", () => {
     if (modos.value === "manual") {
         console.log("manual")
         controls.classList.add("hidden");
+        grafica.classList.add("hidden");
         play.classList.remove("hidden");
     }
     else {
         controls.classList.remove("hidden");
         play.classList.add("hidden");
+        grafica.classList.remove("hidden");
         document.getElementById("game-over").classList.add("hidden");
     }
     game.mode = modos.value;

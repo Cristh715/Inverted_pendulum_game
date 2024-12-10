@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pengüin</title>
-  <link rel="stylesheet" href="style.css" />
-  <script type="module" src="./src/index.js"></script>
-</head>
-<body>
-  <section class="tools">
-    <div class="change-modo">
-      <label for="modos">Modos de juego:</label>
-      <select name="modos" id="modo-game">
-        <option value="manual">Manual</option>
-        <option value="bot">QLearning</option>
-      </select>
-    </div>
-    <div>
-      <label for="">
-        <input type="checkbox" name="wind" id="wind">
-        Viento
-      </label>
-    </div>
-    <section class="controls hidden" id="controls">
-      <label>
-        Episodios
-        <input id="episodes" type="number" value="100">
-      </label>
-      <label>
-        Pasos
-        <input id="steps" type="number" value="100">
-      </label>
-      <button id="startTrain">Entrenar</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartpole-game</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="./src/index.js"></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"
+    ></script>
+  </head>
+  <body>
+    <label for="wind-cant">
+      Viento: 
+      <div id="wind-cant">
+        0
+      </div>
+    </label>
+    <section class="game-section">
+      <section class="tools">
+        <div class="change-modo">
+          <label for="modos">Modos de juego:</label>
+          <select name="modos" id="modo-game">
+            <option value="manual">Manual</option>
+            <option value="bot">QLearning</option>
+          </select>
+        </div>
+        <div>
+          <label for="">
+            <input type="checkbox" name="wind" id="wind" />
+            Viento
+          </label>
+        </div>
+        <section class="controls hidden" id="controls">
+          <label>
+            Episodios
+            <input id="episodes" type="number" value="100" />
+          </label>
+          <label>
+            Pasos
+            <input id="steps" type="number" value="100" />
+          </label>
+          <button id="startTrain">Entrenar</button>
+        </section>
+        <button id="start">Iniciar</button>
+      </section>
+      <div class="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="game-over" class="hidden">
+          <h1>GAME OVER</h1>
+          <p>Puntaje total: <span id="score">0</span></p>
+          <button id="restart">Intentar de nuevo</button>
+        </div>
+      </div>
     </section>
-    <button id="start">Iniciar</button>
-  </section>
-  <div class="game-container">
-    <canvas id="game-canvas"></canvas>
-    <div id="game-over" class="hidden">
-      <h1>GAME OVER</h1>
-      <p>Puntaje total: <span id="score">0</span></p>
-      <button id="restart">Intentar de nuevo</button>
-    </div>
-  </div>
-  <section id="grafica">
-
-  </section>
-</body>
+    <section id="grafica-container" class="hidden">
+      <h3>Recompensas</h3>
+      <div id="grafica"></div>
+    </section>
+  </body>
 </html>

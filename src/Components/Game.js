@@ -4,6 +4,22 @@ import { Wind } from "./Wind.js";
 import { Sprite } from "./Sprites.js";
 import { QLearning } from "./QLearning.js";
 
+const windDiv = document.getElementById('wind-cant');
+const chart = LightweightCharts.createChart(document.getElementById('grafica'), {
+    width: 1000,
+    height: 200,
+    layout: { textColor: 'white', background: { type: 'Solid', color: '#000000' } },
+    grid: { vertLines: { color: '#eeeeee' }, horzLines: { color: '#eeeeee' } },
+    rightPriceScale: { visible: true },
+});
+chart.applyOptions({
+    localization: {
+        timeFormatter: (index) => `${index}`,
+    },
+})
+const lineSeries = chart.addLineSeries();
+
+
 export class Game {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
@@ -26,6 +42,7 @@ export class Game {
         this.maxSteps = 1000;
         this.animationId = null;
         this.windRunning = false;
+        this.rewards = []
 
         this.readInputs();
         this.addEventListeners();
@@ -86,13 +103,14 @@ export class Game {
             }
 
             this.agent.decayExploration();
-
+            this.rewards.push({time: episode, value: totalReward})
             console.log(`Episodio ${episode + 1}: Recompensa total: ${totalReward}`);
         }
         console.log("Entrenamiento completado.");
         this.gameRunning = true;
         this.agent.epsilon = 0.01;
         this.resetGame();
+        lineSeries.setData(this.rewards)
     }
 
     stopAnimation() {
@@ -162,6 +180,7 @@ export class Game {
         }
 
         this.score++;
+        windDiv.innerHTML = this.wind.strength.toFixed(5);
         this.animationId = requestAnimationFrame(() => this.update());
     }
 
