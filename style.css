@@ -33,6 +33,7 @@ h2 {
   align-items: center;
   gap: 10px;
   color: #eae8f9;
+  margin-bottom: 10px;
 }
 
 .change-mode{
@@ -78,7 +79,7 @@ h2 {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.1em;
+  font-size: 1em;
   color: #d0c6df;
 }
 
@@ -155,6 +156,7 @@ select {
   padding: 10px;
   border-radius: 10px;
   margin-left: 48px;
+  font-size: .9em;
 }
 
 #wind-cant {
